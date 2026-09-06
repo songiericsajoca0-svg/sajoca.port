@@ -53,7 +53,7 @@ const ICONS = {
 
 const SKILLS = [
   { label: "MS Office & Google Sheets", value: 88 },
-  { label: "SQL & Data Management", value: 65 },
+  { label: "SQL & Data Management", value: 66 },
   { label: "HTML, CSS & JavaScript", value: 75 },
   { label: "PHP, Flutter & Dart", value: 63 },
   { label: "Figma (Basic Design)", value: 47 },
