@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Son Gieric Sajoca — Full-Stack &amp; Mobile Developer</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<!-- LOADING SCREEN -->
+<div id="pageLoader">
+
+  <!-- Cloud effects -->
+  <div class="cloud cloud1"></div>
+  <div class="cloud cloud2"></div>
+  <div class="cloud cloud3"></div>
+  <div class="cloud cloud4"></div>
+
+  <!-- Loader -->
+  <div class="loader-wrap">
+    <div class="loader"></div>
+    <div class="loading-text">Loading...</div>
+  </div>
+
+</div>
+
+<style>
+  /* =========================
+     LOADING SCREEN
+  ========================= */
+
+  #pageLoader {
+    position: fixed;
+    inset: 0;
+    z-index: 999999;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+
+    transition:
+      opacity 1.2s ease,
+      visibility 1.2s ease;
+  }
+
+  /* =========================
+     CLOUD EFFECTS
+  ========================= */
+
+  .cloud {
+    position: absolute;
+
+    width: 220px;
+    height: 220px;
+
+    border-radius: 50%;
+
+    background:
+      radial-gradient(
+        circle,
+        rgba(160, 160, 160, 0.65) 0%,
+        rgba(190, 190, 190, 0.45) 35%,
+        rgba(220, 220, 220, 0.20) 60%,
+        transparent 75%
+      );
+
+    filter: blur(35px);
+
+    opacity: 0;
+
+    transform: scale(0.25);
+
+    transition:
+      transform 1.5s cubic-bezier(.22, .61, .36, 1),
+      opacity 1.2s ease;
+  }
+
+  /* Cloud positions */
+
+  .cloud1 {
+    top: -50px;
+    left: -50px;
+  }
+
+  .cloud2 {
+    top: 20%;
+    right: -60px;
+  }
+
+  .cloud3 {
+    bottom: -70px;
+    left: 25%;
+  }
+
+  .cloud4 {
+    bottom: 10%;
+    right: 20%;
+  }
+
+  /* =========================
+     WHEN LOADING FINISHES
+  ========================= */
+
+  #pageLoader.hide {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  #pageLoader.hide .cloud {
+    opacity: 1;
+    transform: scale(5);
+  }
+
+  /* Slightly different movement */
+  #pageLoader.hide .cloud1 {
+    transform: translate(80px, 50px) scale(5);
+  }
+
+  #pageLoader.hide .cloud2 {
+    transform: translate(-100px, 30px) scale(5);
+  }
+
+  #pageLoader.hide .cloud3 {
+    transform: translate(50px, -80px) scale(5);
+  }
+
+  #pageLoader.hide .cloud4 {
+    transform: translate(-60px, -50px) scale(5);
+  }
+
+  /* =========================
+     LOADER
+  ========================= */
+
+  .loader-wrap {
+    position: relative;
+    z-index: 10;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+
+    transition:
+      opacity 0.5s ease,
+      transform 0.7s ease;
+  }
+
+  #pageLoader.hide .loader-wrap {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+
+  .loader {
+    width: 70px;
+    aspect-ratio: 1;
+
+    --g: conic-gradient(
+      from -90deg at 10px 10px,
+      #000 90deg,
+      #0000 0
+    );
+
+    background:
+      var(--g),
+      var(--g),
+      var(--g);
+
+    background-size: 50% 50%;
+
+    animation: l19 1s infinite;
+  }
+
+  @keyframes l19 {
+
+    0% {
+      background-position:
+        0 0,
+        10px 10px,
+        20px 20px;
+    }
+
+    33% {
+      background-position:
+        10px 10px;
+    }
+
+    66% {
+      background-position:
+        0 20px,
+        10px 10px,
+        20px 0;
+    }
+
+    100% {
+      background-position:
+        0 0,
+        10px 10px,
+        20px 20px;
+    }
+
+  }
+
+  /* =========================
+     LOADING TEXT
+  ========================= */
+
+  .loading-text {
+    font-family: Arial, sans-serif;
+
+    font-size: 13px;
+
+    color: #666;
+
+    letter-spacing: 0.6px;
+
+    transition:
+      opacity 0.4s ease;
+  }
+
+  #pageLoader.hide .loading-text {
+    opacity: 0;
+  }
+
+</style>
+
+<script>
+  window.addEventListener("load", function () {
+
+    setTimeout(function () {
+
+      document
+        .getElementById("pageLoader")
+        .classList.add("hide");
+
+    }, 1200);
+
+  });
+</script>
+
+
+  <!-- NAV -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="logo">Sajoca</div>
+      <nav class="main-nav hide-mobile">
+        <button class="nav-link" data-target="home">Home</button>
+        <button class="nav-link" data-target="journey">Journey</button>
+        <button class="nav-link" data-target="experience">Experience</button>
+        <button class="nav-link" data-target="skills">Skills</button>
+        <button class="nav-link" data-target="projects">Projects</button>
+        <button class="nav-link" data-target="contact">Contact</button>
+      </nav>
+      <button id="themeToggle" class="icon-btn" aria-label="Toggle dark mode">
+        <svg id="iconMoon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"/></svg>
+        <svg id="iconSun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section id="home" class="container hero">
+    <div class="hero-copy">
+      <div class="badge badge-green">
+        <span class="dot dot-green"></span> Open for opportunities
+      </div>
+    <h1 class="display">
+  Hi, I'm Sajoca<br />
+  <span class="accent-blue">I enjoy creating</span><br />
+  <span class="accent-coral">websites, apps,</span> and working with data.
+</h1>
+      <p class="lede">
+BSIT graduate from Systems Plus Computer College in Caloocan. I’m looking for an IT role where I can put what I’ve learned into practice, gain real experience, and keep improving my skills. Open to positions related to my course that will challenge me and help me grow. Ready to contribute to the team while becoming a better IT professional.
+      </p>
+      <div class="hero-actions">
+        <button class="btn btn-solid" data-target="projects">View Projects
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+        <button class="btn btn-outline" data-target="contact">Let's Talk</button>
+      </div>
+      <div class="hero-socials">
+        <a href="https://www.facebook.com/SonGieric192000/" target="_blank" rel="noreferrer" class="icon-link" aria-label="Facebook">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+        <a href="tel:+639935915712" class="icon-link" aria-label="Phone">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </a>
+        <a href="mailto:songiericsajoca0@gmail.com" class="icon-link" aria-label="Email">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="m22 6-10 7L2 6"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Draggable ID card -->
+    <div class="id-card-wrap">
+      <div class="id-card-string"></div>
+      <div class="id-card" id="idCard">
+        <div class="id-card-top">
+          <div class="id-card-avatar">
+            <!-- Ilagay ang picture mo dito: public/img/profile.png -->
+            <img src="img/profile.jpg" alt="Son Gieric Sajoca" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+            <span class="id-card-avatar-fallback">SG</span>
+          </div>
+        </div>
+        <div class="id-card-body">
+          <div class="id-card-name">Son Gieric Sajoca</div>
+<div class="id-card-role">Junior Web & Data Developer</div>  
+        <div class="id-card-divider"></div>
+          <div class="id-card-grid">
+            <div>
+              <div class="id-card-label">Specialty</div>
+              <div class="id-card-value">Web · Apps · Data</div>
+            </div>
+            <div>
+  <div class="id-card-label">Location</div>
+  <div class="id-card-value">Imus, Cavite / Quezon City, Metro Manila</div>
+</div>
+            <div>
+              <div class="id-card-label">Grad Year</div>
+              <div class="id-card-value">2026</div>
+            </div>
+            <div>
+              <div class="id-card-label">Status</div>
+              <div class="id-card-value id-card-status"><span class="dot dot-green"></span> Open to work</div>
+            </div>
+          </div>
+          <div class="id-card-footer">
+            <span>SGS-2026-DEV</span>
+            <span>BSIT GRAD</span>
+          </div>
+        </div>
+      </div>
+      <div class="id-card-hint">Drag the card</div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <section class="marquee-section">
+    <div class="marquee-track" id="marqueeTrack"></div>
+  </section>
+
+  <!-- WHAT I DO -->
+  <section class="container section">
+    <h2 class="h2">What I do</h2>
+    <p class="section-sub">From interface to database — the full path a real app has to take to ship.</p>
+    <div class="grid-2" id="whatIDoGrid"></div>
+  </section>
+
+  <!-- JOURNEY -->
+  <section id="journey" class="container section">
+    <h2 class="h2">My journey</h2>
+    <p class="section-sub wide">From an ICT strand in senior high to a BSIT diploma at SPCC Caloocan, graduating May 16, 2026.</p>
+    <div class="chip-row">
+      <span class="chip">BSIT Graduate 2026</span>
+<span class="chip">
+  Full-Stack Developer
+  
+</span>      <span class="chip">4+ Projects Completed</span>
+    </div>
+    <div class="timeline" id="timeline"></div>
+    <div class="spotlight-card achievement-card">
+      <div class="achievement-inner">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="accent-coral" style="flex-shrink:0;margin-top:2px"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+        <div>
+          <div class="achievement-title">Achievements</div>
+          <div class="section-sub" style="margin:0">Leadership Training Seminar · 450-hour OJT completion · Statistical analysis with SPSS · BSIT Diploma, May 16, 2026</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience" class="container section">
+    <h2 class="h2">Work experience</h2>
+    <p class="section-sub">On-the-job training that turned classroom skills into real support work.</p>
+    <div id="experienceList"></div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="container section grid-skills">
+    <div class="spotlight-card">
+      <div class="card-heading"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="accent-blue"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg> Technical arsenal</div>
+      <div id="skillBars"></div>
+    </div>
+    <div class="spotlight-card">
+      <div class="card-heading"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="accent-coral"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> Professional traits</div>
+      <div class="chip-row" id="traitChips"></div>
+      <div class="traits-note">Still learning by shipping — every project so far has meant picking up a new tool, framework, or API along the way.</div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATIONS -->
+  <section class="container section">
+    <h2 class="h2">Certifications</h2>
+    <p class="section-sub">Seminars, webinars, and training completed along the way.</p>
+    <div class="cert-grid" id="certGrid"></div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="container section">
+    <h2 class="h2">Projects</h2>
+    <p class="section-sub">A few things built along the way — swap these in with your own links and screenshots.</p>
+    <div class="grid-3" id="projectGrid"></div>
+  </section>
+
+  <!-- PROJECT DETAIL MODAL -->
+  <div class="modal-overlay" id="projectModalOverlay">
+    <div class="modal-box" role="dialog" aria-modal="true">
+      <button class="modal-close" id="modalClose" aria-label="Close">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+      <div class="project-tag" id="modalTag"></div>
+      <h3 class="modal-title" id="modalTitle"></h3>
+      <p class="modal-details" id="modalDetails"></p>
+      <div class="stack-row" id="modalStack"></div>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <section id="contact" class="container section">
+    <div class="contact-panel">
+      <div>
+        <h2 class="h2" style="font-size:26px">Let's build something</h2>
+        <p class="section-sub" style="margin-bottom:20px">Open to any opportunity where I can use my skills, gain experience, learn new things, and grow professionally.</p>
+        <div class="contact-row"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="m22 6-10 7L2 6"/></svg> songiericsajoca0@gmail.com</div>
+        <div class="contact-row"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg> +63 993 591 5712</div>
+        <div class="contact-row"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-top:2px;flex-shrink:0"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Current: Starkville 2, Bucandala 1, Imus, Cavite</div>
+        <div class="contact-row"><span style="width:15px;flex-shrink:0"></span> Alternate: District 1, Brgy. Manresa, Quezon City</div>
+       <a
+  href="/resume/Sajoca%20resume..pdf"
+  target="_blank"
+  rel="noopener noreferrer"
+  class="btn btn-solid my-resume-btn"
+>
+  My Resume
+  <span class="resume-arrow">↗</span>
+</a>
+
+<style>
+  .my-resume-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    width: auto;
+    padding: 8px 14px;
+    font-size: 13px;
+    text-decoration: none;
+    margin-top: 10px;
+    border-radius: 7px;
+    transition: all 0.3s ease;
+  }
+
+  .resume-arrow {
+    display: inline-block;
+    transition: transform 0.3s ease;
+  }
+
+  .my-resume-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  .my-resume-btn:hover .resume-arrow {
+    transform: translate(3px, -3px);
+  }
+
+  .my-resume-btn:active {
+    transform: translateY(-1px);
+  }
+</style>
+      </div>
+      <form
+  action="https://formsubmit.co/songiericsajoca0@gmail.com"
+  method="POST"
+  id="contactForm"
+>
+  <input
+    type="text"
+    name="name"
+    placeholder="Your name"
+    required
+  />
+
+  <input
+    type="email"
+    name="email"
+    placeholder="Email address"
+    required
+  />
+
+  <textarea
+    name="message"
+    placeholder="Message"
+    rows="4"
+    required
+  ></textarea>
+
+  <input
+    type="hidden"
+    name="_subject"
+    value="New Message from Your Portfolio"
+  />
+
+  <input
+    type="hidden"
+    name="_captcha"
+    value="false"
+  />
+
+  <button type="submit" class="btn btn-blue" id="sendMessageBtn">
+    <span>Send message</span>
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+    >
+      <path d="m22 2-7 20-4-9-9-4z"/>
+    </svg>
+  </button>
+
+  <div id="formStatus"></div>
+</form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-note">© 2026 Son Gieric Sajoca | Porfolio.</div>
+      <button class="back-to-top" data-target="home">Back to top
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+      </button>
+    </div>
+  </footer>
+
+  <!-- FLOATING DOCK -->
+  <div class="dock" id="dock">
+    <button class="dock-btn" data-target="home" title="Home"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><span class="dock-label">Home</span></button>
+    <button class="dock-btn" data-target="journey" title="Journey"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg><span class="dock-label">Journey</span></button>
+    <button class="dock-btn" data-target="experience" title="Experience"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg><span class="dock-label">Work</span></button>
+    <button class="dock-btn" data-target="skills" title="Skills"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 2 9 4.9V17L12 22l-9-5.1V6.9z"/></svg><span class="dock-label">Skills</span></button>
+    <button class="dock-btn" data-target="projects" title="Projects"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg><span class="dock-label">Projects</span></button>
+    <button class="dock-btn" data-target="contact" title="Contact"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span class="dock-label">Contact</span></button>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
